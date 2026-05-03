@@ -45,7 +45,7 @@ The system integrates with the National Bank of Poland API to retrieve real exch
 ## Run
 
 ```bash
-cd /Users/shukran/ExchangeServiceShowcase
+cd ExchangeServiceShowcase
 dotnet restore ExchangeServiceShowcase.sln
 dotnet run --project ExchangeServiceShowcase.csproj
 
