@@ -1,0 +1,273 @@
+@model DashboardViewModel
+
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">ExchangeService</div>
+        <nav class="nav">
+            <a class="nav-item active" href="#dashboard">Dashboard</a>
+            <a class="nav-item" href="#rates">Rates</a>
+            <a class="nav-item" href="#history">History</a>
+            <a class="nav-item" href="#exchange">Exchange</a>
+            <a class="nav-item" href="#topup">Top Up Balance</a>
+            <a class="nav-item" href="#transactions">Transactions</a>
+        </nav>
+        <div class="api-box">
+            <div class="api-title">API Preview</div>
+            <code>/api/rates/@Model.SelectedCurrency</code>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="hero" id="dashboard">
+            <div>
+                <p class="eyebrow">Currency Exchange Office</p>
+                <h1>Welcome, @(Model.Account?.Name ?? Model.Username)!</h1>
+                <p class="status">@Model.StatusMessage</p>
+            </div>
+            <div class="balance-pill">
+                <span>Account balance (PLN)</span>
+                <strong>@((Model.Account?.CurrencyBalances.SingleOrDefault(b => b.CurrencyCode == "PLN")?.Amount ?? 0m).ToString("N2")) PLN</strong>
+            </div>
+        </header>
+
+        <section class="cards-row">
+            @foreach (var card in Model.RateCards)
+            {
+                <article class="rate-card">
+                    <div class="flag">@card.Code</div>
+                    <div class="rate-card-body">
+                        <strong>@card.Code</strong>
+                        <div class="rate">@card.Mid.ToString("F4")</div>
+                        <div class="change @(card.ChangePercent < 0 ? "down" : "up")">
+                            @(card.ChangePercent >= 0 ? "+" : "")@card.ChangePercent.ToString("F2")%
+                        </div>
+                        <small>@card.OwnedAmount.ToString("F2") @card.Code</small>
+                    </div>
+                </article>
+            }
+        </section>
+
+        <section class="workspace-grid">
+            <section class="panel stack-panel">
+                <h2>Account</h2>
+                <form asp-action="CreateAccount" method="post" class="form-grid">
+                    <input asp-for="CurrentAccountId" type="hidden" />
+                    <input asp-for="SelectedCurrency" type="hidden" />
+                    <input asp-for="HistoryDays" type="hidden" />
+                    <label>Username</label>
+                    <input asp-for="Username" />
+                    <button type="submit">Create Account</button>
+                </form>
+
+                <form asp-action="LoadAccount" method="post" class="form-grid">
+                    <input asp-for="Username" type="hidden" />
+                    <input asp-for="SelectedCurrency" type="hidden" />
+                    <input asp-for="HistoryDays" type="hidden" />
+                    <label>Current Account ID</label>
+                    <input asp-for="CurrentAccountId" />
+                    <button type="submit" class="secondary">Load Account</button>
+                </form>
+
+                <form asp-action="TopUp" method="post" class="form-grid" id="topup">
+                    <input asp-for="Username" type="hidden" />
+                    <input asp-for="CurrentAccountId" type="hidden" />
+                    <input asp-for="SelectedCurrency" type="hidden" />
+                    <input asp-for="HistoryDays" type="hidden" />
+                    <label>Top Up Balance (PLN)</label>
+                    <input asp-for="TopUpAmount" />
+                    <button type="submit">Top Up</button>
+                </form>
+            </section>
+
+            <section class="panel stack-panel" id="rates">
+                <div class="panel-head">
+                    <h2>Rates</h2>
+                    <a class="mini-link" href="/api/rates/@Model.SelectedCurrency" target="_blank">Open JSON</a>
+                </div>
+                <form asp-action="ChangeCurrency" method="post" class="form-grid">
+                    <input asp-for="Username" type="hidden" />
+                    <input asp-for="CurrentAccountId" type="hidden" />
+                    <input asp-for="TopUpAmount" type="hidden" />
+                    <label>Currency</label>
+                    <select asp-for="SelectedCurrency">
+                        <option>USD</option>
+                        <option>EUR</option>
+                        <option>GBP</option>
+                        <option>CHF</option>
+                    </select>
+                    <label>History days</label>
+                    <input asp-for="HistoryDays" />
+                    <button type="submit">Refresh Rates</button>
+                </form>
+
+                @if (Model.SelectedRate is not null)
+                {
+                    <table class="compact-table">
+                        <thead>
+                            <tr>
+                                <th>Currency</th>
+                                <th>Code</th>
+                                <th>Mid</th>
+                                <th>Ask</th>
+                                <th>Bid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.SelectedRate.Currency</td>
+                                <td>@Model.SelectedRate.Code</td>
+                                <td>@Model.SelectedRate.Mid.ToString("F4")</td>
+                                <td>@Model.SelectedRate.Ask.ToString("F4")</td>
+                                <td>@Model.SelectedRate.Bid.ToString("F4")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </section>
+
+            <section class="panel stack-panel" id="exchange">
+                <h2>Exchange</h2>
+                <div class="tabs">
+                    <span class="tab active">Exchange</span>
+                    <span class="tab">Sell Currency</span>
+                </div>
+
+                <form asp-action="Buy" method="post" class="trade-grid">
+                    <input asp-for="Username" type="hidden" />
+                    <input asp-for="CurrentAccountId" type="hidden" />
+                    <input asp-for="HistoryDays" type="hidden" />
+                    <label>From</label>
+                    <select disabled>
+                        <option>PLN - Polish Zloty</option>
+                    </select>
+                    <label>To</label>
+                    <select asp-for="SelectedCurrency">
+                        <option>USD</option>
+                        <option>EUR</option>
+                        <option>GBP</option>
+                        <option>CHF</option>
+                    </select>
+                    <label>Amount (PLN)</label>
+                    <input asp-for="BuyAmountPln" />
+                    <label>Estimated result</label>
+                    <input value="@(Model.SelectedRate is null ? "" : (decimal.TryParse(Model.BuyAmountPln, out var buyPln) ? (buyPln / Model.SelectedRate.Ask).ToString("F2") : "")) @Model.SelectedCurrency" readonly />
+                    <p class="hint">Exchange rate: 1 @Model.SelectedCurrency = @(Model.SelectedRate?.Ask.ToString("F4") ?? "-") PLN</p>
+                    <button type="submit">Exchange</button>
+                </form>
+
+                <form asp-action="Sell" method="post" class="trade-grid sell-grid">
+                    <input asp-for="Username" type="hidden" />
+                    <input asp-for="CurrentAccountId" type="hidden" />
+                    <input asp-for="HistoryDays" type="hidden" />
+                    <input asp-for="SelectedCurrency" type="hidden" />
+                    <label>Sell amount (@Model.SelectedCurrency)</label>
+                    <input asp-for="SellAmountCurrency" />
+                    <label>Estimated PLN</label>
+                    <input value="@(Model.SelectedRate is null ? "" : (decimal.TryParse(Model.SellAmountCurrency, out var sellAmount) ? (sellAmount * Model.SelectedRate.Bid).ToString("F2") : "")) PLN" readonly />
+                    <button type="submit" class="secondary">Sell Currency</button>
+                </form>
+            </section>
+        </section>
+
+        <section class="panel wide-panel" id="transactions">
+            <div class="panel-head">
+                <h2>Transaction History</h2>
+                <span>Total transactions: @(Model.Account?.Transactions.Count ?? 0)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Rate</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (Model.Account?.Transactions.Any() == true)
+                {
+                    @foreach (var tx in Model.Account.Transactions.OrderByDescending(t => t.DateUtc))
+                    {
+                        <tr>
+                            <td>@tx.DateUtc.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@tx.Type</td>
+                            <td>@tx.FromCurrency</td>
+                            <td>@tx.ToCurrency</td>
+                            <td>@tx.Amount.ToString("F2")</td>
+                            <td>@tx.Rate.ToString("F4")</td>
+                            <td>@tx.ResultAmount.ToString("F2") @tx.ToCurrency</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">No transactions yet.</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </section>
+
+        <div class="bottom-grid">
+            <section class="panel" id="history">
+                <div class="panel-head">
+                    <h2>History</h2>
+                    <span>@Model.SelectedCurrency for last @Model.HistoryDays days</span>
+                </div>
+                <table class="compact-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Currency</th>
+                            <th>Rate (PLN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var point in Model.History)
+                    {
+                        <tr>
+                            <td>@point.Date.ToString("yyyy-MM-dd")</td>
+                            <td>@point.CurrencyCode</td>
+                            <td>@point.Rate.ToString("F4")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="panel">
+                <h2>Balances</h2>
+                <table class="compact-table">
+                    <thead>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Account?.CurrencyBalances.Any() == true)
+                    {
+                        @foreach (var balance in Model.Account.CurrencyBalances.OrderBy(b => b.CurrencyCode))
+                        {
+                            <tr>
+                                <td>@balance.CurrencyCode</td>
+                                <td>@balance.Amount.ToString("F2")</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2">No account selected.</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+</div>

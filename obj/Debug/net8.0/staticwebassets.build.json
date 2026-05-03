@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "Hash": "VPbK80yw3DquUwXzaVVthMwwY1ljIJLFvlwp/3qr9xk=",
+  "Source": "ExchangeServiceShowcase",
+  "BasePath": "_content/ExchangeServiceShowcase",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ExchangeServiceShowcase/wwwroot",
+      "Source": "ExchangeServiceShowcase",
+      "ContentRoot": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/",
+      "BasePath": "_content/ExchangeServiceShowcase",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/css/site.css",
+      "SourceId": "ExchangeServiceShowcase",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/",
+      "BasePath": "_content/ExchangeServiceShowcase",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bxofq0fxxa",
+      "Integrity": "EUo5co0Zbkyia69JESXtuNpJ/KUNsjXS21t/YiCGPkE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/site.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/site.bxofq0fxxa.css",
+      "AssetFile": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3950"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUo5co0Zbkyia69JESXtuNpJ/KUNsjXS21t/YiCGPkE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 22 Apr 2026 17:55:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bxofq0fxxa"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUo5co0Zbkyia69JESXtuNpJ/KUNsjXS21t/YiCGPkE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3950"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUo5co0Zbkyia69JESXtuNpJ/KUNsjXS21t/YiCGPkE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 22 Apr 2026 17:55:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUo5co0Zbkyia69JESXtuNpJ/KUNsjXS21t/YiCGPkE="
+        }
+      ]
+    }
+  ]
+}

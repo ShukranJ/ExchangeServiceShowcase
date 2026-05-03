@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/shukran/Desktop/ExchangeServiceShowcase/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.ExchangeServiceShowcase.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.ExchangeServiceShowcase.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.ExchangeServiceShowcase.props",
+      "PackagePath": "build\\ExchangeServiceShowcase.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.ExchangeServiceShowcase.props",
+      "PackagePath": "buildMultiTargeting\\ExchangeServiceShowcase.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.ExchangeServiceShowcase.props",
+      "PackagePath": "buildTransitive\\ExchangeServiceShowcase.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
