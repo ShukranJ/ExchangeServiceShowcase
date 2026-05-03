@@ -154,7 +154,7 @@ Example API endpoints exposed by the application:
 
 Example scenario:
 
-1. Create an account named `John Doe`
+1. Create an account named `Ozzy Osbourne`
 2. Top up `1000 PLN`
 3. Check the current USD rate
 4. Buy USD using PLN
@@ -162,6 +162,23 @@ Example scenario:
 6. View transaction history
 7. Retrieve historical USD exchange rates
 8. Sell part of the USD balance back to PLN
+
+##  Example Screenshots
+
+### 1. Account Created
+![Account Creation Screen](image.png)
+
+### 2. Balance Top-Up
+![Balance Top-Up Screen](image-1.png)
+
+### 3. Buy USD
+![Currency Exchange - Buy USD](image-2.png)
+
+### 4. Sell USD
+![Currency Exchange - Sell USD](image-3.png)
+
+### 5. Transaction History
+![Transaction History Table](image-4.png)
 
 ---
 
