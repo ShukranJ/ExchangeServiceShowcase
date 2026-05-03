@@ -42,17 +42,12 @@ The system integrates with the National Bank of Poland API to retrieve real exch
 2. Open the terminal in the project directory.
 3. Restore dependencies:
 
-```bash
-dotnet restore
-
-
 ## Run
 
 ```bash
 cd /Users/shukran/ExchangeServiceShowcase
 dotnet restore ExchangeServiceShowcase.sln
 dotnet run --project ExchangeServiceShowcase.csproj
-```
 
 Open:
 
