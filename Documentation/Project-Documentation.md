@@ -163,22 +163,31 @@ Example scenario:
 7. Retrieve historical USD exchange rates
 8. Sell part of the USD balance back to PLN
 
-##  Example Screenshots
+## Example Screenshots
 
 ### 1. Account Created
-![Account Creation Screen](account.png)
+![Account Creation Screen](./account.png)
+
+---
 
 ### 2. Balance Top-Up
-![Balance Top-Up Screen](topup.png)
+![Balance Top-Up Screen](./topup.png)
+
+---
 
 ### 3. Buy USD
-![Currency Exchange - Buy USD](buy.png)
+![Currency Exchange - Buy USD](./buy.png)
+
+---
 
 ### 4. Sell USD
-![Currency Exchange - Sell USD](sell.png)
+![Currency Exchange - Sell USD](./sell.png)
+
+---
 
 ### 5. Transaction History
-![Transaction History Table](transactions.png)
+![Transaction History Table](./transactions.png)
+
 ---
 
 ## 9. Platform Note
