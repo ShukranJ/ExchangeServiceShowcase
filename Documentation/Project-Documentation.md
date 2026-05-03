@@ -166,20 +166,19 @@ Example scenario:
 ##  Example Screenshots
 
 ### 1. Account Created
-![Account Creation Screen](image.png)
+![Account Creation Screen](account.png)
 
 ### 2. Balance Top-Up
-![Balance Top-Up Screen](image-1.png)
+![Balance Top-Up Screen](topup.png)
 
 ### 3. Buy USD
-![Currency Exchange - Buy USD](image-2.png)
+![Currency Exchange - Buy USD](buy.png)
 
 ### 4. Sell USD
-![Currency Exchange - Sell USD](image-3.png)
+![Currency Exchange - Sell USD](sell.png)
 
 ### 5. Transaction History
-![Transaction History Table](image-4.png)
-
+![Transaction History Table](transactions.png)
 ---
 
 ## 9. Platform Note
